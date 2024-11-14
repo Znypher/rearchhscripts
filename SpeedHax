@@ -1,0 +1,26 @@
+-- Made By znypher / rearchh
+-- Contact Me on Discord if You Want -> rearchh
+
+local RunService = game:GetService("RunService")
+local hb = RunService.Heartbeat
+local tpwalking = false
+
+function startTeleportWalk(distance)
+    tpwalking = true
+    local chr = game.Players.LocalPlayer.Character
+    local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+
+    while tpwalking and chr and hum and hum.Parent do
+        local delta = hb:Wait()
+        if hum.MoveDirection.Magnitude > 0 then
+            local moveDistance = distance and tonumber(distance) or 1
+            chr:TranslateBy(hum.MoveDirection * moveDistance * delta * 4) -- Change The Value of The Speed Here
+        end
+    end
+end
+
+function stopTeleportWalk()
+    tpwalking = false
+end
+
+startTeleportWalk(5) 
